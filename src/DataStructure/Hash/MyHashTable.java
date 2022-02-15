@@ -53,6 +53,7 @@ class Emp {
     }
 }
 
+
 class EmpList {
     Emp head;
 
@@ -66,6 +67,7 @@ class EmpList {
             cur = cur.next;
             System.out.println("add one");
         }
+
         cur.next = emp;
     }
 
