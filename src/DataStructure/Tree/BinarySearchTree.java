@@ -219,6 +219,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
         //实际操作，把key加入
         queue.add(x.key);
+
         if (x.right != null) {
             midErgodic(x.right, queue);
         }
