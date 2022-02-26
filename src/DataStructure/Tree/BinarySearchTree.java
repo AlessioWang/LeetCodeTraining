@@ -230,7 +230,6 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         //记录路径
         Stack<Node> nodes = new Stack<>();
         Node cur = root;
-
         while (cur != null || !nodes.isEmpty()) {
             while (cur != null) {
                 nodes.push(cur);
@@ -370,5 +369,5 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return Integer.max(numL, numR) + 1;
     }
 
-
 }
+
