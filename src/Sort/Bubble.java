@@ -1,8 +1,11 @@
-package Sort.Bubble;
+package Sort;
 
 import java.util.concurrent.RejectedExecutionHandler;
 
 /**
+ * 冒泡排序
+ * 时间复杂度是n^2
+ * 适用于待排序的元素比较少的情况
  * @auther Alessio
  * @date 2022/2/26
  **/
