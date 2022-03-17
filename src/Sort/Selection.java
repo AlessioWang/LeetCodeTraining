@@ -1,9 +1,5 @@
 package Sort;
 
-import OfferTraining.MinSubArrayLen;
-
-import javax.print.attribute.standard.JobOriginatingUserName;
-
 /**
  * 选择排序
  * 时间复杂度为O（n^2）

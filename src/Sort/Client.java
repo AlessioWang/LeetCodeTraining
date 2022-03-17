@@ -1,7 +1,5 @@
 package Sort;
 
-import Sort.Bubble;
-
 import java.util.Arrays;
 
 /**
@@ -11,8 +9,8 @@ import java.util.Arrays;
 public class Client {
 
     public static void main(String[] args) {
-        Integer[] array = new Integer[]{10,2,4,3,4,6,1,0};
-        Selection.sort(array);
+        Integer[] array = new Integer[]{1,2,7,5,10,1,0};
+        Shell.sort(array);
         System.out.println(Arrays.toString(array));
     }
 

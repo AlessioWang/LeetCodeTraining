@@ -1,7 +1,5 @@
 package OfferTraining;
 
-import OfferTraining.MinSubArrayLen;
-
 /**
  * @auther Alessio
  * @date 2022/1/8
