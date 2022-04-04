@@ -1,4 +1,4 @@
-package OfferTraining;
+package OfferTraining.Code;
 
 import java.util.HashMap;
 import java.util.Map;

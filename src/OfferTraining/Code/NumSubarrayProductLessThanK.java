@@ -1,4 +1,4 @@
-package OfferTraining;
+package OfferTraining.Code;
 
 /**
  * @auther Alessio

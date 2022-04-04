@@ -2,14 +2,11 @@ package OfferTraining;
 
 /**
  * @auther Alessio
- * @date 2022/1/14
+ * @date 2022/4/4
  **/
-public class TestClient {
-
+public class BinaryTest {
     public static void main(String[] args) {
-        int n = 8;
-        System.out.println(n>>1);
+        int n = 5;
+        System.out.println(n & 2);
     }
-
-
 }

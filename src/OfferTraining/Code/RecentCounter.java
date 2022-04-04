@@ -1,4 +1,4 @@
-package OfferTraining;
+package OfferTraining.Code;
 
 import java.util.LinkedList;
 import java.util.Queue;

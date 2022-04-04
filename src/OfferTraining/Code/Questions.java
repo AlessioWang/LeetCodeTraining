@@ -1,5 +1,6 @@
-package OfferTraining;
+package OfferTraining.Code;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -195,4 +196,154 @@ public class Questions {
         return cur;
     }
 
+    /**
+     * 不能这么写，因为没法判断s1的字母是否连续
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+
+    public boolean checkInclusion(String s1, String s2) {
+        if (s2.length() < s1.length()) {
+            return false;
+        }
+
+        int[] count = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            count[s1.charAt(i) - 'a']++;
+            count[s2.charAt(i) - 'a']--;
+        }
+
+        if (check(count)) {
+            return true;
+        } else {
+            for (int i = s1.length(); i < s2.length(); i++) {
+                count[s2.charAt(i - s1.length()) - 'a']++;
+                count[s2.charAt(i) - 'a']--;
+                if (check(count)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean check(int[] cnts) {
+        for (int cnt : cnts) {
+            if (cnt != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public boolean isPalindrome(String s) {
+        String ss = s.replaceAll(" ", "");
+        int i = 0;
+        int j = ss.length() - 1;
+
+        while (i < j) {
+            while (!Character.isLetterOrDigit(ss.charAt(i)) && i < ss.length() - 2) {
+                i++;
+            }
+
+            while (!Character.isLetterOrDigit(ss.charAt(j)) && j > 1) {
+                j--;
+            }
+
+            char begin = ss.charAt(i);
+            char end = ss.charAt(j);
+
+            if (!Character.isLetterOrDigit(begin) && !Character.isLetterOrDigit(end)) {
+                return true;
+            }
+
+            if (Character.toLowerCase(begin) != Character.toLowerCase(end)) {
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+
+    //[24]
+    public boolean hasCycle(ListNode head) {
+        ListNode n = head;
+        HashSet set = new HashSet();
+
+        while (n != null) {
+            if (!set.contains(n)) {
+                set.add(n);
+            } else {
+                return true;
+            }
+            n = n.next;
+        }
+
+        return false;
+    }
+
+    public boolean hasCycle2(ListNode head) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode fast = dummy.next;
+        ListNode slow = dummy;
+
+        while (fast != null && slow != null) {
+            if (fast == slow) {
+                return true;
+            }
+
+            if (fast.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
+            } else {
+                break;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isPowerOfTwo(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        return (n & (n - 1)) == 0;
+    }
+
+    public boolean isPowerOfFour(int n) {
+        if (n <= 0) {
+            return false;
+        }
+
+        return (n & (n - 1)) == 0 && (n % 3 == 1);
+    }
+
+    public int hammingWeight(int n) {
+        int counter = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n & (1 << i)) != 0) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public int[] swapNumbers(int[] numbers) {
+        int a = numbers[0];
+        int b = numbers[1];
+
+        a = a ^ b;
+        b = a ^ b;
+        a = a ^ b;
+
+        return new int[]{a, b};
+    }
 }
