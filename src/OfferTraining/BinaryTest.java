@@ -7,6 +7,6 @@ package OfferTraining;
 public class BinaryTest {
     public static void main(String[] args) {
         int n = 5;
-        System.out.println(n & 2);
+        System.out.println(3 % 6);
     }
 }

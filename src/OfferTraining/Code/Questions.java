@@ -354,4 +354,75 @@ public class Questions {
         }
         return sum;
     }
+
+    public boolean hasAlternatingBits(int n) {
+        while (n != 0) {
+            if (((n & 3) == 2) || ((n & 3) == 1)) {
+                n = n >> 1;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int countPrimeSetBits(int left, int right) {
+        int result = 0;
+        for (int i = left; i < right; i++) {
+            //有几个计算置位
+            int n = 0;
+
+            int num = i;
+            //消掉几个1
+            while (num != 0) {
+                num = num & (num - 1);
+                n++;
+            }
+            System.out.println(n);
+
+            //检测n是不是质数
+            if (check(n)) {
+                result++;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean check(int n) {
+        if (n < 2) {
+            return false;
+        }
+
+        for (int i = 2; i < n - 1; i++) {
+            double r = n % i;
+            if (r == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int countPrimes(int n) {
+        int counter = 0;
+        for (int i = 0; i < n; i++) {
+            if (checkPrimes(i)) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    private boolean checkPrimes(int n) {
+        if (n < 2 || (n % 2 == 0) && n > 2) {
+            return false;
+        }
+
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
