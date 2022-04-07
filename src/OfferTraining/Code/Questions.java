@@ -611,6 +611,46 @@ public class Questions {
         return Integer.parseInt(strs[0]) * 60 + Integer.parseInt(strs[1]);
     }
 
+    //[37]小星星碰撞
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+        for (int i : asteroids) {
+            if (stack.isEmpty() || !(stack.peek() > 0 && i < 0)) {
+                stack.push(i);
+            } else {
+                int pushNum = 0;
+                while (!stack.isEmpty() && stack.peek() * i < 0) {
+                    int last = stack.pop();
+                    if (Math.abs(last) < Math.abs(i)) {
+                        pushNum = i;
+                    } else if (Math.abs(last) == Math.abs(i) && last * i < 0) {
+                        pushNum = 0;
+                        break;
+                    } else {
+                        pushNum = last;
+                        break;
+                    }
+                }
+                if (pushNum != 0) {
+                    stack.push(pushNum);
+                }
+            }
+        }
+        return stack.stream().mapToInt(a -> a).toArray();
+    }
+
+    //[38]每日温度
+    public int[] dailyTemperatures(int[] temperatures) {
+        int length = temperatures.length;
+        int[] result = new int[length];
+        Stack<Integer> stack = new Stack<>();
+        stack.push(Integer.MIN_VALUE);
+
+
+
+        return result;
+    }
+
 }
 
 

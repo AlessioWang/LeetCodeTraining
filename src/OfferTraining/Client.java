@@ -13,12 +13,14 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        List<String> strs = Arrays.asList("00:00","04:00","22:00");
-
+//        int[] ast = {5,10,-5};
+//        int[] ast = {10,2,-5};
+//        int[] ast = {5,-5};
+//        int[] ast = {-2,-2,1,-2};
+        int[] ast = {73, 74, 75, 71, 69, 72, 76, 73};
         Questions questions = new Questions();
-        int n = questions.findMinDifference(strs);
-
-        System.out.println(n);
+        int[] n = questions.dailyTemperatures(ast);
+        System.out.println(Arrays.toString(n));
     }
 
 }
