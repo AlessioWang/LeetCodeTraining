@@ -1,10 +1,7 @@
 package OfferTraining.Code;
 
 import java.awt.geom.Area;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @auther Alessio
@@ -561,6 +558,59 @@ public class Questions {
 
         return true;
     }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+        HashMap<Integer, List<String>> map = new HashMap<>();
+        for (String s : strs) {
+            int[] record = new int[26];
+
+            for (int i = 0; i < s.length(); i++) {
+                record[s.charAt(i) - 'a']++;
+            }
+
+            if (map.containsKey(Arrays.hashCode(record))) {
+                map.get(Arrays.hashCode(record)).add(s);
+            } else {
+                List<String> stringList = new ArrayList<>();
+                stringList.add(s);
+                map.put(Arrays.hashCode(record), stringList);
+            }
+        }
+
+        List<List<String>> result = new LinkedList<>(map.values());
+
+        return result;
+    }
+
+    public int findMinDifference(List<String> timePoints) {
+        //时间转换为分钟
+        int[] times = new int[timePoints.size() + 1];
+        times[times.length - 1] = Integer.MAX_VALUE;
+        for (int i = 0; i < times.length - 1; i++) {
+            times[i] = transferMinute(timePoints.get(i));
+        }
+        //将时间进行排序
+        Arrays.sort(times);
+        times[times.length - 1] = times[0];
+
+        int minTime = Integer.MAX_VALUE;
+        for (int i = 0; i < times.length - 1; i++) {
+            int t1 = times[i];
+            int t2 = times[i + 1];
+            int gap = Integer.min(Math.abs(t2 - t1), 24 * 60 - Math.abs(t2 - t1));
+            minTime = Integer.min(minTime, gap);
+
+        }
+
+        return minTime;
+    }
+
+    private int transferMinute(String time) {
+        String[] strs = time.split(":");
+        return Integer.parseInt(strs[0]) * 60 + Integer.parseInt(strs[1]);
+    }
+
 }
 
 

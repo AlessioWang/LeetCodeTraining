@@ -3,19 +3,22 @@ package OfferTraining;
 import OfferTraining.Code.ListNode;
 import OfferTraining.Code.Questions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @auther Alessio
  * @date 2022/1/8
  **/
 public class Client {
     public static void main(String[] args) {
-        int[] nums = {2, 1, 5, 6, 2, 3};
-        String[] words = {"apple","app"};
-        String order = "abcdefghijklmnopqrstuvwxyz";
-        Questions questions = new Questions();
-        boolean b = questions.isAlienSorted(words, order);
+        List<String> strs = Arrays.asList("00:00","04:00","22:00");
 
-        System.out.println(b);
+        Questions questions = new Questions();
+        int n = questions.findMinDifference(strs);
+
+        System.out.println(n);
     }
 
 }
