@@ -1,5 +1,7 @@
 package OfferTraining.Code;
 
+import java.awt.geom.Area;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -425,4 +427,163 @@ public class Questions {
         }
         return true;
     }
+
+    public int singleNumber2(int[] nums) {
+        int[] counter = new int[32];
+
+        for (int i = 0; i < nums.length; i++) {
+            int j = 0;
+            int num = nums[i];
+            while (num != 0) {
+                counter[j] += num % 2;
+                num /= 2;
+                j++;
+            }
+        }
+
+        int result = 0;
+        for (int i = 0; i < counter.length; i++) {
+            result += (counter[i] % 3) * (1 << i);
+        }
+
+        return result;
+    }
+
+    //[39] 直方图最大矩形面积
+    public int largestRectangleAreaRaw(int[] heights) {
+        int start = 0;
+        int maxArea = Integer.MIN_VALUE;
+        for (; start < heights.length; start++) {
+            int h = Integer.MAX_VALUE;
+            for (int end = start; end < heights.length; end++) {
+                h = h < heights[end] ? h : heights[end];
+                int w = end - start + 1;
+                maxArea = maxArea > h * w ? maxArea : h * w;
+            }
+        }
+        return maxArea;
+    }
+
+    public int largestRectangleArea(int[] heights) {
+        return smallest(heights, 0, heights.length);
+    }
+
+    private int smallest(int[] heights, int start, int end) {
+        if (start == end) {
+            return 0;
+        }
+
+        if (start + 1 == end) {
+            return heights[start];
+        }
+
+        int shortest = Integer.MAX_VALUE;
+        int index = 0;
+        for (int i = start; i < end; i++) {
+            int h = heights[i];
+            if (shortest > h) {
+                shortest = h;
+                index = i;
+            }
+        }
+
+        int curArea = shortest * (end - start);
+        int leftArea = smallest(heights, 0, index);
+        int rightArea = smallest(heights, index + 1, end);
+
+        return Integer.max(curArea, Integer.max(leftArea, rightArea));
+    }
+
+
+    public int largestRectangleAreaStack(int[] heights) {
+        int maxArea = Integer.MIN_VALUE;
+        //初始化栈
+        Stack<Integer> positions = new Stack<>();
+        positions.push(-1);
+
+        for (int i = 0; i < heights.length; i++) {
+            while (positions.peek() != -1 && heights[i] <= heights[positions.peek()]) {
+                int h = heights[positions.pop()];
+                int w = i - positions.peek() - 1;
+                maxArea = Integer.max(w * h, maxArea);
+            }
+            positions.push(i);
+        }
+
+        while (positions.peek() != -1) {
+            maxArea = Integer.max(maxArea, heights[positions.pop()] * (heights.length - positions.peek() - 1));
+        }
+
+        return maxArea;
+    }
+
+    public boolean isAlienSorted(String[] words, String order) {
+        char[] orders = order.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+        //初始化顺序表
+        for (int i = 0; i < orders.length; i++) {
+            map.put(orders[i], i);
+        }
+
+        int length = words.length;
+        for (int i = 0; i < length - 1; i++) {
+            String former = words[i];
+            String later = words[i + 1];
+
+            if (former.equals(later)) {
+                return true;
+            }
+
+            //比较两个字母的顺序
+            int pos = 0;
+            int v1 = map.get(former.charAt(pos));
+            int v2 = map.get(later.charAt(pos));
+
+            while (v1 == v2) {
+                pos++;
+                if (pos == former.length()) {
+                    v1 = Integer.MIN_VALUE;
+                } else {
+                    v1 = map.get(former.charAt(pos));
+                }
+
+                if (pos == later.length()) {
+                    v2 = Integer.MIN_VALUE;
+                } else {
+                    v2 = map.get(later.charAt(pos));
+                }
+            }
+
+            if (v1 > v2) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

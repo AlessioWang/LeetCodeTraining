@@ -7,8 +7,8 @@ package OfferTraining;
 public class TestClient {
 
     public static void main(String[] args) {
-        int n = 8;
-        System.out.println(n>>1);
+        String s = "abc aaa";
+        StringBuilder sb = new StringBuilder(s);
     }
 
 

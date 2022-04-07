@@ -9,22 +9,13 @@ import OfferTraining.Code.Questions;
  **/
 public class Client {
     public static void main(String[] args) {
+        int[] nums = {2, 1, 5, 6, 2, 3};
+        String[] words = {"apple","app"};
+        String order = "abcdefghijklmnopqrstuvwxyz";
         Questions questions = new Questions();
-        int r = questions.countPrimeSetBits(6, 10);
-        System.out.println("______");
-        System.out.println(r);
+        boolean b = questions.isAlienSorted(words, order);
+
+        System.out.println(b);
     }
-
-//    public static void main(String[] args) {
-//        int n = 0;
-//        int num = 9;
-//        while (num != 0) {
-//            num = num & (num - 1);
-//            n++;
-//        }
-//
-//        System.out.println(n);
-//    }
-
 
 }
