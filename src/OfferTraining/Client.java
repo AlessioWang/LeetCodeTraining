@@ -13,14 +13,14 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-//        int[] ast = {5,10,-5};
-//        int[] ast = {10,2,-5};
-//        int[] ast = {5,-5};
-//        int[] ast = {-2,-2,1,-2};
-        int[] ast = {73, 74, 75, 71, 69, 72, 76, 73};
+
+//        int[] num1 = {2,6,4,8,10,9,15};
+        int[] num1 = {2};
+//        int[] num1 = {1,3,2,2,2};
+//        int[] num1 = {1,2,3,4};
         Questions questions = new Questions();
-        int[] n = questions.dailyTemperatures(ast);
-        System.out.println(Arrays.toString(n));
+        int n = questions.findUnsortedSubarray2(num1);
+        System.out.println(n);
     }
 
 }

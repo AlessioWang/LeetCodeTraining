@@ -1,5 +1,7 @@
 package OfferTraining.Code;
 
+import sun.java2d.pipe.SpanIterator;
+
 import java.awt.geom.Area;
 import java.util.*;
 
@@ -644,13 +646,96 @@ public class Questions {
         int length = temperatures.length;
         int[] result = new int[length];
         Stack<Integer> stack = new Stack<>();
-        stack.push(Integer.MIN_VALUE);
+        for (int i = 0; i < length; i++) {
+            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                result[stack.peek()] = i - stack.pop();
+            }
+            stack.push(i);
+        }
+        return result;
+    }
 
+    //[496] 下一个更大的元素
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int length = nums2.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < length; i++) {
+            while (!stack.isEmpty() && nums2[i] > nums2[stack.peek()]) {
+                map.put(nums2[stack.peek()], nums2[i]);
+                stack.pop();
+            }
+            stack.push(i);
+        }
 
+        int[] result = new int[nums1.length];
+        for (int i = 0; i < nums1.length; i++) {
+            result[i] = map.getOrDefault(nums1[i], -1);
+        }
+        return result;
+    }
+
+    //[1475]商品折扣后的最终价格
+    public int[] finalPrices(int[] prices) {
+        int length = prices.length;
+        int[] result = new int[length];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < length; i++) {
+            while (!stack.isEmpty() && prices[i] <= prices[stack.peek()]) {
+                result[stack.peek()] = prices[stack.peek()] - prices[i];
+                stack.pop();
+            }
+            stack.push(i);
+        }
+
+        while (!stack.isEmpty()) {
+            int i = stack.pop();
+            result[i] = prices[i];
+        }
 
         return result;
     }
 
+    //581最短无序连续子数组
+    public int findUnsortedSubarray(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+        boolean start = true;
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < nums.length; i++) {
+            while (!stack.isEmpty() && nums[i] < nums[stack.peek()]) {
+                if (start) {
+                    left = i - 1;
+                    start = false;
+                }
+                stack.pop();
+                right = i + 1;
+            }
+            System.out.println("r " + right);
+            stack.push(i);
+        }
+        System.out.println("l " + left);
+
+        return right - left;
+    }
+
+    public int findUnsortedSubarray2(int[] nums) {
+        int[] sorted = nums.clone();
+        Arrays.sort(sorted);
+        int left = 0;
+        int right = nums.length-1;
+
+        while (left <= nums.length-1 && nums[left] == sorted[left]) {
+            left++;
+        }
+
+        while (right >= left && nums[right] == sorted[right]) {
+            right--;
+        }
+
+        return (right - left + 1);
+    }
 }
 
 
