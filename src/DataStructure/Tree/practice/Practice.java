@@ -1,7 +1,9 @@
 package DataStructure.Tree.practice;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @auther Alessio
@@ -30,7 +32,7 @@ public class Practice {
      * @param root 根节点
      * @param nodes 目标结果
      */
-    public void dfs(TreeNode root, List<Integer> nodes) {
+    private void dfs(TreeNode root, List<Integer> nodes) {
         if(root != null){
             dfs(root.left, nodes);
             nodes.add(root.val);
@@ -39,4 +41,37 @@ public class Practice {
     }
 
 
+    public List<Integer> stackMidTraversal(TreeNode root){
+        List<Integer> result = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()){
+            while (cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            result.add(cur.val);
+            cur = cur.right;
+        }
+
+        return result;
+    }
+
+
+    public List<Integer> mid(TreeNode root){
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            result.add(cur.val);
+            cur = cur.right;
+        }
+        return result;
+    }
 }

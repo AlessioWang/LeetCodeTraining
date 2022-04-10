@@ -15,6 +15,6 @@ public class Test {
         rootL.right = new Practice.TreeNode(4);
 
         Practice p = new Practice();
-        System.out.println(p.midOrderTraversal(root));
+        System.out.println(p.mid(root));
     }
 }
