@@ -15,11 +15,13 @@ public class Client {
     public static void main(String[] args) {
 
 //        int[] num1 = {2,6,4,8,10,9,15};
-        int[] num1 = {2};
+//        int[] num1 = {2};
+//        int[] num1 = {1,2};
 //        int[] num1 = {1,3,2,2,2};
 //        int[] num1 = {1,2,3,4};
+        int[] num1 = {1,2,3,3,3};
         Questions questions = new Questions();
-        int n = questions.findUnsortedSubarray2(num1);
+        int n = questions.findUnsortedSubarray3(num1);
         System.out.println(n);
     }
 

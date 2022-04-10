@@ -724,9 +724,9 @@ public class Questions {
         int[] sorted = nums.clone();
         Arrays.sort(sorted);
         int left = 0;
-        int right = nums.length-1;
+        int right = nums.length - 1;
 
-        while (left <= nums.length-1 && nums[left] == sorted[left]) {
+        while (left <= nums.length - 1 && nums[left] == sorted[left]) {
             left++;
         }
 
@@ -736,6 +736,32 @@ public class Questions {
 
         return (right - left + 1);
     }
+
+    public int findUnsortedSubarray3(int[] nums) {
+        int length = nums.length;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int left = 0, right = 0;
+
+        for (int i = 0; i < length; i++) {
+            if (max <= nums[i]) {
+                max = nums[i];
+            } else {
+                right = i;
+            }
+
+            if (min >= nums[length - 1 - i]) {
+                min = nums[length - 1 - i];
+            } else {
+                left = length - 1 - i;
+            }
+        }
+        System.out.println("r " + right);
+        System.out.println("l " + left);
+
+        return right == left ? 0 : right - left + 1;
+    }
+
 }
 
 
