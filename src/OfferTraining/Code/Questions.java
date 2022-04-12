@@ -2,6 +2,7 @@ package OfferTraining.Code;
 
 import sun.java2d.pipe.SpanIterator;
 
+import javax.crypto.interfaces.PBEKey;
 import java.awt.geom.Area;
 import java.util.*;
 
@@ -798,6 +799,55 @@ public class Questions {
         }
     }
 
+    //[74] 合并区间
+    public int[][] merge(int[][] intervals) {
+        List<int[]> resultList = new LinkedList<>();
+        Arrays.sort(intervals, Comparator.comparing(i -> i[0]));
+        int num = intervals.length;
+        int i = 0;
+        int[] cur = null;
+
+        while (i < num) {
+            if (cur == null) {
+                cur = intervals[i];
+            }
+            int startCur = cur[0];
+            int endCur = cur[1];
+            int startNext = intervals[i + 1 < num ? i + 1 : i][0];
+            int endNext = intervals[i + 1 < num ? i + 1 : i][1];
+
+            if (startCur < startNext && startNext < endCur) {
+                cur = new int[]{startCur, Integer.max(endCur, endNext)};
+            } else {
+                resultList.add(cur);
+                cur = null;
+            }
+            i++;
+        }
+        if (cur != null)
+            resultList.add(cur);
+
+        int[][] result = new int[resultList.size()][2];
+        return resultList.toArray(result);
+    }
+
+    public int[][] merge2(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparing(ints -> ints[0]));
+        List<int[]> resultList = new LinkedList<>();
+        int length = intervals.length;
+        int i = 0;
+        while (i < length) {
+            int cur[] = intervals[i];
+            while (i + 1 < length && cur[0] <= intervals[i + 1][0] && cur[1] >= intervals[i + 1][0]) {
+                cur = new int[]{cur[0], Integer.max(intervals[i + 1][1], cur[1])};
+                i++;
+            }
+            i++;
+            resultList.add(cur);
+        }
+        int[][] result = new int[resultList.size()][2];
+        return resultList.toArray(result);
+    }
 }
 
 

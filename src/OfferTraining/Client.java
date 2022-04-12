@@ -5,6 +5,7 @@ import OfferTraining.Code.Questions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -13,16 +14,15 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
+        int[][] input = new int[4][2];
+        input[0] = new int[]{4, 5};
+        input[1] = new int[]{1, 3};
+        input[2] = new int[]{2, 6};
+        input[3] = new int[]{8, 9};
 
-//        int[] num1 = {2,6,4,8,10,9,15};
-//        int[] num1 = {2};
-//        int[] num1 = {1,2};
-//        int[] num1 = {1,3,2,2,2};
-//        int[] num1 = {1,2,3,4};
-        int[] num1 = {1,2,3,3,3};
         Questions questions = new Questions();
-        int n = questions.findUnsortedSubarray3(num1);
-        System.out.println(n);
+        System.out.println(Arrays.toString(questions.merge2(input)[0]));
+
     }
 
 }
