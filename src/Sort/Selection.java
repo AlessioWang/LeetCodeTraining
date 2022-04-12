@@ -3,10 +3,23 @@ package Sort;
 /**
  * 选择排序
  * 时间复杂度为O（n^2）
+ *
  * @auther Alessio
  * @date 2022/2/26
  **/
 public class Selection {
+
+    public static void selectSort(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            int indexMin = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] < nums[indexMin]) {
+                    indexMin = j;
+                    exchange(nums, i, indexMin);
+                }
+            }
+        }
+    }
 
     public static void sort(Comparable[] origin) {
         //i 表示当前数组最前面的元素的下标
@@ -20,7 +33,6 @@ public class Selection {
             }
             exchange(origin, i, indexMin);
         }
-
     }
 
     private static boolean greater(Comparable a, Comparable b) {
@@ -29,6 +41,12 @@ public class Selection {
 
     private static void exchange(Comparable[] array, int a, int b) {
         Comparable temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }
+
+    private static void exchange(int[] array, int a, int b) {
+        int temp = array[a];
         array[a] = array[b];
         array[b] = temp;
     }
