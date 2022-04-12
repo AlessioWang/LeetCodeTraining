@@ -848,6 +848,33 @@ public class Questions {
         int[][] result = new int[resultList.size()][2];
         return resultList.toArray(result);
     }
+
+    public int[] countingSort(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        for (int i : nums) {
+            min = Integer.min(min, i);
+            max = Integer.max(max, i);
+        }
+
+        int[] counting = new int[max - min + 1];
+        for (int i : nums) {
+            counting[i - min]++;
+        }
+
+        int i = 0;
+        for (int num = min; num <= max; num++) {
+            while (counting[num - min] != 0) {
+                nums[i] = num;
+                counting[num - min]--;
+                i++;
+            }
+        }
+
+        return nums;
+    }
+
 }
 
 
