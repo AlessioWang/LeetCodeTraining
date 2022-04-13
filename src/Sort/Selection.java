@@ -51,5 +51,17 @@ public class Selection {
         array[b] = temp;
     }
 
+    public static void selSort(int[] nums) {
+        int indexMin;
+        for (int i = 0; i < nums.length; i++) {
+            indexMin = i;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] < nums[indexMin]) {
+                    indexMin = j;
+                }
+            }
+            exchange(nums, i, indexMin);
+        }
+    }
 
 }

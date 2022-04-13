@@ -9,8 +9,8 @@ import java.util.Arrays;
 public class Client {
 
     public static void main(String[] args) {
-        int[] array = new int[]{1,2,7,5,10,1,0};
-        Selection.selectSort(array);
+        int[] array = new int[]{1,2,7,5,10,1,20,0,7,3,0};
+        Selection.selSort(array);
         System.out.println(Arrays.toString(array));
     }
 
