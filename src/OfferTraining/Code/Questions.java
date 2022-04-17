@@ -875,6 +875,50 @@ public class Questions {
         return nums;
     }
 
+    private int findPos(int[] origin, int start, int end) {
+        int select = origin[end];
+        int i = start;
+        int j = start;
+        for (; j < end; j++) {
+            if (origin[j] < select) {
+                exchange(origin, i, j);
+                i++;
+            }
+        }
+        exchange(origin, i, end);
+        return i;
+    }
+
+    private void exchange(int[] origin, int i, int j) {
+        int temp = origin[i];
+        origin[i] = origin[j];
+        origin[j] = temp;
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+        int start = 0;
+        int end = nums.length - 1;
+        int target = nums.length - k;
+        int index = findPos(nums, start, end);
+        while (index != target) {
+            if (index < target) {
+                start = index + 1;
+            } else {
+                end = index - 1;
+            }
+
+            index = findPos(nums, start, end);
+        }
+        return nums[index];
+    }
+
+    //[58] 最后一个单词的长度
+    public int lengthOfLastWord(String s) {
+        String[] strs = s.split(" ");
+        String last = strs[strs.length - 1];
+        return last.length();
+    }
+
 }
 
 
