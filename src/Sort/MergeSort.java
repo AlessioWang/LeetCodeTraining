@@ -22,11 +22,11 @@ public class MergeSort {
         }
 
         int mid = (end + start) / 2;
-        sort(dst, origin, 0, mid);
-        sort(dst, origin, mid + 1, end);
+        sort(dst, origin, start, mid);
+        sort(dst, origin, mid, end);
 
         int i = start;
-        int j = mid;
+        int j = mid+1;
         int k = start;
         while (i < mid || j < end) {
             if (j == end || (origin[i] < origin[j] && i < mid)) {

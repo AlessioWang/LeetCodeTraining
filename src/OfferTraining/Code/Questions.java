@@ -895,6 +895,7 @@ public class Questions {
         origin[j] = temp;
     }
 
+    //[76] 数组中的第k大的数字
     public int findKthLargest(int[] nums, int k) {
         int start = 0;
         int end = nums.length - 1;
@@ -919,7 +920,107 @@ public class Questions {
         return last.length();
     }
 
+    public ListNode merge2List(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode();
+        ListNode cur = result;
+        while (l1 != null || l2 != null) {
+            if (l2 == null || (l1 != null && l1.val < l2.val)) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        result = result.next;
+        return result;
+    }
+
+    public ListNode split(ListNode node) {
+        ListNode slow = node;
+        ListNode fast = node.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode head = slow.next;
+        //断开，把一个链表分成两个
+        slow.next = null;
+        return head;
+    }
+
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode node1 = head;
+        ListNode node2 = split(head);
+
+        node1 = sortList(node1);
+        node2 = sortList(node2);
+
+        return merge2List(node1, node2);
+    }
+
+    //[60]出现频率最高的k个数字
+    public int[] topKFrequent(int[] nums, int k) {
+        int[] target = new int[k];
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+
+        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>((n1, n2) -> n1.getValue() - n2.getValue());
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (minHeap.size() < k) {
+                minHeap.offer(entry);
+            } else if (entry.getValue() > minHeap.peek().getValue()) {
+                minHeap.poll();
+                minHeap.offer(entry);
+            }
+        }
+
+        int i = 0;
+        while (minHeap.iterator().hasNext()) {
+            target[i] = minHeap.poll().getKey();
+            i++;
+        }
+
+        return target;
+    }
+
+    //[61]和最小的k个数对
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> target = new LinkedList<>();
+        PriorityQueue<List<Integer>> maxHeap = new PriorityQueue<>((n1, n2) -> ((n2.get(0) + n2.get(1)) - (n1.get(0) + n1.get(1))));
+        for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                if (maxHeap.size() < k) {
+                    maxHeap.offer(Arrays.asList(nums1[i], nums2[j]));
+                } else {
+                    if (nums1[i] + nums2[j] < maxHeap.peek().get(0) + maxHeap.peek().get(1)) {
+                        maxHeap.poll();
+                        maxHeap.offer(Arrays.asList(nums1[i], nums2[j]));
+                    }
+                }
+            }
+        }
+
+        while (!maxHeap.isEmpty()) {
+            target.add(maxHeap.poll());
+        }
+
+        return target;
+    }
+
 }
+
 
 
 

@@ -2,6 +2,7 @@ package OfferTraining;
 
 import OfferTraining.Code.Questions;
 import Sort.MergeSort;
+import Sort.MergeSort2;
 
 import java.util.Arrays;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
 public class SortTest {
     public static void main(String[] args) {
         int[] nums = {3,2,1,5,6,4};
-        MergeSort ms = new MergeSort();
-        System.out.println(Arrays.toString(ms.mergeSort(nums)));
+        MergeSort2 m = new MergeSort2();
+        System.out.println(Arrays.toString(m.mergeSort(nums)));
     }
 }
