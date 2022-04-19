@@ -1,4 +1,4 @@
-package DataStructure.Tree;
+package DataStructure.tree;
 
 
 

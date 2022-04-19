@@ -1,4 +1,4 @@
-package DataStructure.Tree.practice;
+package DataStructure.tree.practice;
 
 /**
  * @auther Alessio

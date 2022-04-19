@@ -1,4 +1,4 @@
-package DataStructure.Hash;
+package DataStructure.hash;
 
 import java.util.Scanner;
 

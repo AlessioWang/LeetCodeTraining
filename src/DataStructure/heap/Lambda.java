@@ -1,6 +1,5 @@
-package DataStructure.Heap;
+package DataStructure.heap;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 

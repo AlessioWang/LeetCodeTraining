@@ -1,10 +1,5 @@
-package DataStructure.Tree;
+package DataStructure.tree;
 
-
-import java.nio.file.attribute.BasicFileAttributes;
-import java.sql.SQLOutput;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @auther Alessio

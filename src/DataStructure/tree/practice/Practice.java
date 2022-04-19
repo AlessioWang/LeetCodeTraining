@@ -1,4 +1,4 @@
-package DataStructure.Tree.practice;
+package DataStructure.tree.practice;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
