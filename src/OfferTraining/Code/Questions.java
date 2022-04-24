@@ -999,25 +999,31 @@ public class Questions {
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> target = new LinkedList<>();
         PriorityQueue<List<Integer>> maxHeap = new PriorityQueue<>((n1, n2) -> ((n2.get(0) + n2.get(1)) - (n1.get(0) + n1.get(1))));
-        for (int i = 0; i < nums1.length; i++) {
-            for (int j = 0; j < nums2.length; j++) {
+        for (int j : nums1) {
+            for (int value : nums2) {
                 if (maxHeap.size() < k) {
-                    maxHeap.offer(Arrays.asList(nums1[i], nums2[j]));
+                    maxHeap.offer(Arrays.asList(j, value));
                 } else {
-                    if (nums1[i] + nums2[j] < maxHeap.peek().get(0) + maxHeap.peek().get(1)) {
+                    if (j + value < maxHeap.peek().get(0) + maxHeap.peek().get(1)) {
                         maxHeap.poll();
-                        maxHeap.offer(Arrays.asList(nums1[i], nums2[j]));
+                        maxHeap.offer(Arrays.asList(j, value));
                     }
                 }
             }
         }
-
         while (!maxHeap.isEmpty()) {
             target.add(maxHeap.poll());
         }
-
         return target;
     }
+
+//    //[63]替换单词
+//    public String replaceWords(List<String> dictionary, String sentence) {
+//
+//    }
+
+
+
 
 }
 
