@@ -1017,12 +1017,52 @@ public class Questions {
         return target;
     }
 
-//    //[63]替换单词
-//    public String replaceWords(List<String> dictionary, String sentence) {
-//
-//    }
+    //[68]查找插入位置
+    public int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
 
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] > target || nums[mid] == target) {
+                if (mid == 0 || nums[mid - 1] < target) {
+                    return mid;
+                } else {
+                    right = mid - 1;
+                }
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            }
+        }
 
+        return nums.length;
+    }
+
+    //[69]山峰数组的顶部
+    public int peakIndexInMountainArray(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        if (arr.length == 1) {
+            return 0;
+        }
+
+        if (arr.length == 0) {
+            return -1;
+        }
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (mid == 0 || mid == arr.length - 1 || ((arr[mid] > arr[mid + 1] && arr[mid] > arr[mid - 1]))) {
+                return mid;
+            } else if (arr[mid - 1] < arr[mid] && arr[mid] < arr[mid + 1]) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        return -1;
+    }
 
 
 }

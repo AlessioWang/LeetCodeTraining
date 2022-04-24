@@ -14,10 +14,10 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int[] num1 = {-10, -4, 0, 0, 6};
-        int[] num2 = {3, 5, 6, 7, 8, 100};
+        int[] nums = {3, 5, 3, 2, 0};
+
         Questions questions = new Questions();
-        System.out.println(questions.kSmallestPairs(num1, num2, 10));
+        System.out.println(questions.peakIndexInMountainArray(nums));
     }
 
 }
