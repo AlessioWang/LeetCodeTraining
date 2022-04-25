@@ -1085,6 +1085,7 @@ public class Questions {
         return nums[nums.length - 1];
     }
 
+    //[72]求平方根
     public int mySqrt(int x) {
         int start = 0;
         int end = x;
@@ -1102,6 +1103,34 @@ public class Questions {
 
         return -1;
     }
+
+    //[73]狒狒吃香蕉
+    public int minEatingSpeed(int[] piles, int h) {
+        Arrays.sort(piles);
+        int start = 1;
+        int end = piles[piles.length - 1];
+
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            int counter = 0;
+            int before = 0;
+            for (int n : piles) {
+                counter += Math.ceil((double) n / mid);
+                before += Math.ceil((double) n / (mid - 1));
+            }
+
+            if ((counter <= h && before > h) || (counter <= h && mid == 1)) {
+                return mid;
+            } else if (counter <= h) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return -1;
+    }
+
 
 }
 

@@ -14,10 +14,10 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int[] nums = {2,2,3,3,5};
+        int[] nums = {1,1,1,999999999};
 
         Questions questions = new Questions();
-        System.out.println(questions.mySqrt(100));
+        System.out.println(questions.minEatingSpeed(nums, 10));
     }
 
 }
