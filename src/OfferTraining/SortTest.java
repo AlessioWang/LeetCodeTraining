@@ -12,8 +12,7 @@ import java.util.Arrays;
  **/
 public class SortTest {
     public static void main(String[] args) {
-        int[] nums = {3,2,1,5,6,4};
-        MergeSort2 m = new MergeSort2();
-        System.out.println(Arrays.toString(m.mergeSort(nums)));
+        int i = (int) 1.5;
+        System.out.println(i);
     }
 }

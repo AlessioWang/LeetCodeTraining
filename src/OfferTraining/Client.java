@@ -14,10 +14,10 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int[] nums = {3, 5, 3, 2, 0};
+        int[] nums = {2,2,3,3,5};
 
         Questions questions = new Questions();
-        System.out.println(questions.peakIndexInMountainArray(nums));
+        System.out.println(questions.mySqrt(100));
     }
 
 }
