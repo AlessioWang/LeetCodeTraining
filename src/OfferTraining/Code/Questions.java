@@ -1131,6 +1131,57 @@ public class Questions {
         return -1;
     }
 
+    //[367]有效的完全平方数
+    public boolean isPerfectSquare(int num) {
+        long start = 0;
+        long end = num;
+
+        while (start <= end) {
+            long mid = (start + end) / 2;
+            if (mid * mid == num) {
+                return true;
+            } else if (mid * mid < num) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return false;
+    }
+
+    //[34]排序数组中查找元素的第一个和最后一个位置
+    public int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+        int start = 0;
+        int end = nums.length - 1;
+
+        while (start <= end && Arrays.equals(result, new int[]{-1, -1})) {
+            int mid = (start + end) / 2;
+            if (nums[mid] == target) {
+                result = new int[]{mid, mid};
+                for (int n = mid; n <= nums.length-1 ; n++) {
+                    if (nums[n] == target) {
+                        result[1] = n;
+                    } else {
+                        break;
+                    }
+                }
+                for (int m = mid; m >= 0; m--) {
+                    if (nums[m] == target) {
+                        result[0] = m;
+                    }else{
+                        break;
+                    }
+                }
+            } else if (nums[mid] < target) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return result;
+    }
 
 }
 

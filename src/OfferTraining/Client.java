@@ -14,10 +14,10 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int[] nums = {1,1,1,999999999};
+        int[] nums = {2,2};
 
         Questions questions = new Questions();
-        System.out.println(questions.minEatingSpeed(nums, 10));
+        System.out.println(Arrays.toString(questions.searchRange(nums, 2)));
     }
 
 }
