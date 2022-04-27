@@ -1,10 +1,7 @@
 package OfferTraining.Code;
 
-import sun.java2d.pipe.SpanIterator;
+import org.w3c.dom.stylesheets.LinkStyle;
 
-import javax.crypto.interfaces.PBEKey;
-import javax.imageio.ImageTranscoder;
-import java.awt.geom.Area;
 import java.util.*;
 
 /**
@@ -1160,7 +1157,7 @@ public class Questions {
             int mid = (start + end) / 2;
             if (nums[mid] == target) {
                 result = new int[]{mid, mid};
-                for (int n = mid; n <= nums.length-1 ; n++) {
+                for (int n = mid; n <= nums.length - 1; n++) {
                     if (nums[n] == target) {
                         result[1] = n;
                     } else {
@@ -1170,7 +1167,7 @@ public class Questions {
                 for (int m = mid; m >= 0; m--) {
                     if (nums[m] == target) {
                         result[0] = m;
-                    }else{
+                    } else {
                         break;
                     }
                 }
@@ -1182,6 +1179,123 @@ public class Questions {
         }
         return result;
     }
+
+    //[79]所有子集
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        dealIndex(nums, 0, new LinkedList<>(), result);
+        return result;
+    }
+
+    private void dealIndex(int[] nums, int index, LinkedList<Integer> subset, List<List<Integer>> result) {
+        if (index == nums.length) {
+            result.add(new LinkedList<>(subset));
+        } else if (index < nums.length) {
+            dealIndex(nums, index + 1, subset, result);
+            subset.add(nums[index]);
+            dealIndex(nums, index + 1, subset, result);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+    //[80]包含k个元素的集合
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        int[] nums = new int[n];
+        for (int i = 1; i <= n; i++) {
+            nums[i - 1] = i;
+        }
+        helper(nums, 0, k, new LinkedList<>(), result);
+        return result;
+    }
+
+    private void helper(int[] nums, int index, int k, List<Integer> subset, List<List<Integer>> result) {
+        if (subset.size() == k) {
+            result.add(new LinkedList<>(subset));
+        } else if (index <= nums.length - 1) {
+            helper(nums, index + 1, k, subset, result);
+            subset.add(nums[index]);
+            helper(nums, index + 1, k, subset, result);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+    //[81] 允许重复选择元素的组合
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+        helperCombine(candidates, 0, target, new LinkedList<>(), result);
+        return result;
+    }
+
+    private void helperCombine(int[] nums, int index, int target, List<Integer> subset, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(new LinkedList<>(subset));
+        } else if (index <= nums.length - 1 && target > 0) {
+            helperCombine(nums, index + 1, target, subset, result);
+            subset.add(nums[index]);
+            helperCombine(nums, index, target - nums[index], subset, result);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+    //[82]包含重复元素集合的组合
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+        Arrays.sort(candidates);
+        helpCom(candidates, 0, target, new LinkedList<>(), result);
+        return result;
+    }
+
+    private void helpCom(int[] nums, int index, int target, List<Integer> subset, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(new LinkedList<>(subset));
+        } else if (target > 0 && index <= nums.length - 1) {
+            helpCom(nums, getNext(nums, index), target, subset, result);
+            subset.add(nums[index]);
+            helpCom(nums, index + 1, target - nums[index], subset, result);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+    private int getNext(int[] nums, int index) {
+        int cur = nums[index];
+        for (int i = index; i < nums.length; i++) {
+            if (cur != nums[i]) {
+                return i;
+            }
+        }
+        return nums.length;
+    }
+
+    //[83]没有重复元素集合的全排列
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        helper(nums, 0, result);
+        return result;
+    }
+
+    private void helper(int[] nums, int index, List<List<Integer>> result) {
+        if (index == nums.length - 1) {
+            List<Integer> subset = new LinkedList<>();
+            for (int num : nums) {
+                subset.add(num);
+            }
+            result.add(subset);
+        } else {
+            for (int j = index; j < nums.length; j++) {
+                swap(nums, index, j);
+                helper(nums, index + 1, result);
+                swap(nums, index, j);
+            }
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
 
 }
 

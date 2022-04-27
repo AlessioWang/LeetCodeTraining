@@ -14,10 +14,9 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int[] nums = {2,2};
-
+        int [] nums = {1,2,3};
         Questions questions = new Questions();
-        System.out.println(Arrays.toString(questions.searchRange(nums, 2)));
+        System.out.println(questions.permute(nums));
     }
 
 }
