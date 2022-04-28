@@ -1324,7 +1324,64 @@ public class Questions {
         }
     }
 
+    //[85]生成匹配的括号
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new LinkedList<>();
+        helpGen(n, n, "", result);
+        return result;
+    }
 
+    private void helpGen(int left, int right, String str, List<String> result) {
+        if (right == 0 && left == 0) {
+            result.add(str);
+        } else if (left >= 0 && right >= 0) {
+            if (left > 0) {
+                helpGen(left - 1, right, str + "(", result);
+            }
+            if (left < right) {
+                helpGen(left, right - 1, str + ")", result);
+            }
+        }
+    }
+
+    //[86]切割回文字符串
+    public String[][] partition(String s) {
+        List<String[]> list = new LinkedList<>();
+        dfs(s, 0, new LinkedList<>(), list);
+        String[][] result = new String[list.size()][];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i);
+        }
+        return result;
+    }
+
+    private void dfs(String s, int index, List<String> strs, List<String[]> result) {
+        if (index == s.length()) {
+            String[] st = strs.toArray(new String[strs.size()]);
+            result.add(st);
+        } else {
+            for (int i = index; i < s.length(); i++) {
+                String sub = s.substring(index, i + 1);
+                if (checkPal(sub)) {
+                    strs.add(sub);
+                    dfs(s, i + 1, strs, result);
+                    strs.remove(strs.size() - 1);
+                }
+            }
+        }
+    }
+
+    private boolean checkPal(String str) {
+        char[] chars = str.toCharArray();
+        int left = 0;
+        int right = str.length() - 1;
+        while (left <= right) {
+            if (chars[left++] != chars[right--]) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 
