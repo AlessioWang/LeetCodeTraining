@@ -2,6 +2,7 @@ package OfferTraining.Code;
 
 import org.w3c.dom.stylesheets.LinkStyle;
 
+import javax.xml.stream.FactoryConfigurationError;
 import java.util.*;
 
 /**
@@ -1294,6 +1295,33 @@ public class Questions {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+    //[84]包含重复元素集合的全排列
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        help(nums, 0, result);
+        return result;
+    }
+
+    private void help(int[] nums, int index, List<List<Integer>> result) {
+        if (index == nums.length - 1) {
+            List<Integer> subset = new LinkedList<>();
+            for (int n : nums) {
+                subset.add(n);
+            }
+            result.add(subset);
+        } else {
+            Set<Integer> set = new HashSet<>();
+            for (int j = index; j < nums.length; j++) {
+                if (!set.contains(nums[j])) {
+                    set.add(nums[j]);
+                    swap(nums, index, j);
+                    help(nums, index + 1, result);
+                    swap(nums, index, j);
+                }
+            }
+        }
     }
 
 

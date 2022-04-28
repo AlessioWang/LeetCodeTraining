@@ -14,9 +14,9 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int [] nums = {1,2,3};
+        int [] nums = {1,1,3};
         Questions questions = new Questions();
-        System.out.println(questions.permute(nums));
+        System.out.println(questions.permuteUnique(nums));
     }
 
 }
