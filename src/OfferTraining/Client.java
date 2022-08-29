@@ -14,9 +14,8 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        int [] nums = {1,1,3};
         Questions questions = new Questions();
-        System.out.println(Arrays.deepToString(questions.partition("google")));
+        System.out.println(questions.restoreIpAddresses("010010"));
     }
 
 }

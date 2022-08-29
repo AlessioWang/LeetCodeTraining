@@ -1382,6 +1382,102 @@ public class Questions {
         }
         return true;
     }
+
+    //[87]复原IP
+    public List<String> restoreIpAddresses(String s) {
+        List<String> result = new ArrayList<>();
+        if (s.length() > 12) {
+            return result;
+        }
+        dfss(s, 0, new LinkedList<>(), result);
+        return result;
+    }
+
+    public void dfss(String s, int index, List<String> cur, List<String> result) {
+        if (index == s.length()) {
+            if (transfer(cur) != null) {
+                result.add(transfer(cur));
+            }
+        } else {
+            for (int i = index; i < s.length(); i++) {
+                String sub = s.substring(index, i + 1);
+                if (checkIP(sub)) {
+                    cur.add(sub);
+                    dfss(s, i + 1, cur, result);
+                    cur.remove(cur.size() - 1);
+                }
+            }
+        }
+    }
+
+
+    public boolean checkIP(String str) {
+        if (str.length() <= 3 && str.length() >= 1) {
+            if (str.equals("0") || (str.charAt(0) != '0' && Integer.parseInt(str) <= 255)) {
+                System.out.println(str);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String transfer(List<String> stringList) {
+        if (stringList.size() == 4) {
+            StringBuilder sb = new StringBuilder(stringList.get(0));
+            for (int i = 1; i < stringList.size(); i++) {
+                sb.append(".");
+                sb.append(stringList.get(i));
+            }
+            return sb.toString();
+        }
+        return null;
+    }
+
+    //【88】合并两个有序数组
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int index = m + n - 1;
+
+
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[index] = nums1[i];
+                i--;
+            } else {
+                nums1[index] = nums2[j];
+                j--;
+            }
+            index--;
+        }
+
+        while (j >= 0) {
+            nums1[index] = nums2[j];
+            j--;
+            index--;
+        }
+    }
+
+    // [125] 验证回文字符串
+    public boolean isPalindrome01(String s) {
+        String str1 = s.replaceAll("\\p{Punct}", "");
+        String str = str1.replaceAll(" ", "").toLowerCase();
+        char[] chars = str.toCharArray();
+
+        int i = 0;
+        int j = chars.length - 1;
+
+        while (i <= j) {
+            if (chars[i] == chars[j]) {
+                i++;
+                j--;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 
