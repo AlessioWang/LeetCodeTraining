@@ -1,8 +1,5 @@
 package OfferTraining.Code;
 
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import javax.xml.stream.FactoryConfigurationError;
 import java.util.*;
 
 /**
@@ -1477,6 +1474,18 @@ public class Questions {
         }
 
         return true;
+    }
+
+    //[55] 二叉树的深度
+    public static int maxDepth(OfferTraining.Code.TreeNode root) {
+        //        退出条件
+        if (root == null)
+            return 0;
+        //        单层逻辑
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        //        传递参数
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 }
 
