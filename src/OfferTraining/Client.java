@@ -2,6 +2,7 @@ package OfferTraining;
 
 import OfferTraining.Code.ListNode;
 import OfferTraining.Code.Questions;
+import sun.text.normalizer.UBiDiProps;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,8 +15,14 @@ import java.util.List;
  **/
 public class Client {
     public static void main(String[] args) {
-        Questions questions = new Questions();
-        System.out.println(questions.restoreIpAddresses("010010"));
+
     }
 
+//    public static List<List<Integer>> combine(int n, int k) {
+//
+//    }
+//
+//    public static void backTracking(int n, int k, int index) {
+//
+//    }
 }
