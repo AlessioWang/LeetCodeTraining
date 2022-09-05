@@ -1489,9 +1489,56 @@ public class Questions {
     }
 
     //[77]组合
-//    public static List<List<Integer>> combine(int n, int k) {
-//
-//    }
+    public static List<List<Integer>> combine77(int n, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        LinkedList<Integer> subset = new LinkedList<>();
+
+        backTracking(n, k, 1, subset, result);
+        return result;
+    }
+
+    public static void backTracking(int n, int k, int index, LinkedList<Integer> subset, List<List<Integer>> result) {
+        if (subset.size() == k) {
+            result.add(new LinkedList<>(subset));
+        } else if (index <= n) {
+            backTracking(n, k, index + 1, subset, result);
+            subset.add(index);
+            backTracking(n, k, index + 1, subset, result);
+            subset.removeLast();
+        }
+    }
+
+    //[39]组合总和
+    public List<List<Integer>> combinationSum39(int[] candidates, int target) {
+        List<List<Integer>> result = new LinkedList<>();
+
+        if (candidates.length == 0) {
+            return result;
+        }
+
+        backTracking39(candidates, target, 0, new LinkedList<Integer>(), result);
+        return result;
+    }
+
+    public void backTracking39(int[] candidates, int target, int index, List<Integer> subset, List<List<Integer>> result) {
+
+        if (sumAll(subset) == target) {
+            result.add(new LinkedList<>(subset));
+        } else if (sumAll(subset) < target && index < candidates.length) {
+            backTracking39(candidates, target, index + 1, subset, result);
+            subset.add(candidates[index]);
+            backTracking39(candidates, target, index, subset, result);
+            subset.remove(subset.size() - 1);
+        }
+    }
+
+    public int sumAll(List<Integer> subset) {
+        int result = 0;
+        for (int n : subset) {
+            result += n;
+        }
+        return result;
+    }
 }
 
 
