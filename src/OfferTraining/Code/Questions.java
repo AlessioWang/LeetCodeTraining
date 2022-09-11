@@ -1539,6 +1539,27 @@ public class Questions {
         }
         return result;
     }
+
+    //[offer 65] 不用加减乘除做加法
+    //^相当于无进位的加法
+    //&相当于求每一位的进位数
+    //（a^b）^((a&b)<<1)
+    public int add(int a, int b) {
+        if (b == 0) return a;
+        return add((a ^ b), ((a & b) << 1));
+    }
+
+    public int add2(int a, int b) {
+        while (b != 0) {
+            int carry = (a & b);
+            a = (a ^ b) ^ carry;
+            b = carry << 1;
+        }
+
+        return a;
+    }
+
+
 }
 
 

@@ -10,37 +10,27 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         int[] can = {2, 3, 6, 7};
-        System.out.println(client.combinationSum(can, 7));
+
+        System.out.println(client.add(5, 7));
+        System.out.println(client.add2(3, 34));
     }
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new LinkedList<>();
+    //^相当于无进位的加法
+    //&相当于求每一位的进位数
+    //（a^b）^((a&b)<<1)
+    public int add(int a, int b) {
+        if (b == 0) return a;
+        return add((a ^ b), ((a & b) << 1));
+    }
 
-        if (candidates.length == 0) {
-            return result;
+    public int add2(int a, int b) {
+        while (b != 0) {
+            int carry = (a & b);
+            a = (a ^ b) ^ carry;
+            b = carry << 1;
         }
 
-        backTracking39(candidates, target, 0, new LinkedList<Integer>(), result);
-        return result;
+        return a;
     }
 
-    public void backTracking39(int[] candidates, int target, int index, List<Integer> subset, List<List<Integer>> result) {
-
-        if (sumAll(subset) == target) {
-            result.add(new LinkedList<>(subset));
-        } else if (sumAll(subset) < target && index < candidates.length) {
-            backTracking39(candidates, target, index + 1, subset, result);
-            subset.add(candidates[index]);
-            backTracking39(candidates, target, index, subset, result);
-            subset.remove(subset.size() - 1);
-        }
-    }
-
-    public int sumAll(List<Integer> subset) {
-        int result = 0;
-        for (int n : subset) {
-            result += n;
-        }
-        return result;
-    }
 }
