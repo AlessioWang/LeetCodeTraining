@@ -1559,6 +1559,91 @@ public class Questions {
         return a;
     }
 
+    //[46]全排列
+    public List<List<Integer>> permute46(int[] nums) {
+        List<List<Integer>> result = new LinkedList<>();
+        help46(nums, 0, result);
+        return result;
+    }
+
+    public void help46(int[] nums, int index, List<List<Integer>> result) {
+        if (index == nums.length) {
+            List<Integer> set = new LinkedList<>();
+            for (int n : nums) {
+                set.add(n);
+            }
+            result.add(set);
+        } else {
+            for (int j = index; j < nums.length; j++) {
+                swap46(nums, index, j);
+                help46(nums, index + 1, result);
+                swap46(nums, index, j);
+            }
+        }
+
+
+    }
+
+    public void swap46(int[] nums, int i, int j) {
+        if (i != j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+    }
+
+    //[40]组合总和
+    public List<List<Integer>> combinationSum40(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        boolean[] flags = new boolean[candidates.length];
+        LinkedList<List<Integer>> result = new LinkedList<>();
+
+        backTrace(candidates, target, 0, flags, 0, new LinkedList<>(), result);
+        return result;
+    }
+
+    public void backTrace(int[] candidates, int target, int index, boolean[] flags, int sum, List<Integer> set, LinkedList<List<Integer>> result) {
+        if (sum == target) {
+            result.add(new LinkedList<>(set));
+        } else {
+            for (int j = index; j < candidates.length && (sum + candidates[j]) <= target; j++) {
+                if (j > 0 && candidates[j] == candidates[j - 1] && !flags[j - 1]) {
+                    continue;
+                }
+                flags[j] = true;
+                sum = sum + candidates[j];
+                set.add(candidates[j]);
+                backTrace(candidates, target, j + 1, flags, sum, set, result);
+                flags[j] = false;
+                sum -= set.get(set.size() - 1);
+                set.remove(set.size() - 1);
+            }
+        }
+    }
+
+    //[1221] 分隔平衡字符串
+    public int balancedStringSplit(String s) {
+        int result = 0;
+        char[] strs = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+
+        if (strs.length > 0) {
+            stack.push(strs[0]);
+        }
+
+        for (int i = 1; i < strs.length; i++) {
+            if (stack.size() != 0 && stack.peek() != strs[i]) {
+                stack.pop();
+            } else {
+                stack.push(strs[i]);
+            }
+
+            if (stack.size() == 0)
+                result++;
+        }
+
+        return result;
+    }
 
 }
 

@@ -1,5 +1,7 @@
 package OfferTraining;
 
+import com.sun.xml.internal.txw2.output.IndentingXMLFilter;
+
 import java.util.*;
 
 /**
@@ -9,28 +11,24 @@ import java.util.*;
 public class Client {
     public static void main(String[] args) {
         Client client = new Client();
-        int[] can = {2, 3, 6, 7};
-
-        System.out.println(client.add(5, 7));
-        System.out.println(client.add2(3, 34));
+        int[] nums = {3, 2, 1, 5, 6, 6, 4};
+        System.out.println(client.findKthLargest(nums, 2));
     }
 
-    //^相当于无进位的加法
-    //&相当于求每一位的进位数
-    //（a^b）^((a&b)<<1)
-    public int add(int a, int b) {
-        if (b == 0) return a;
-        return add((a ^ b), ((a & b) << 1));
-    }
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-    public int add2(int a, int b) {
-        while (b != 0) {
-            int carry = (a & b);
-            a = (a ^ b) ^ carry;
-            b = carry << 1;
+        for (int n : nums) {
+            if (minHeap.size() < k) {
+                minHeap.add(n);
+            } else {
+                if (minHeap.peek() < n) {
+                    minHeap.poll();
+                    minHeap.add(n);
+                }
+            }
         }
 
-        return a;
+        return minHeap.peek();
     }
-
 }
