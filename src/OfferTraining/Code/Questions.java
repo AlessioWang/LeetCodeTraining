@@ -820,8 +820,7 @@ public class Questions {
             }
             i++;
         }
-        if (cur != null)
-            resultList.add(cur);
+        if (cur != null) resultList.add(cur);
 
         int[][] result = new int[resultList.size()][2];
         return resultList.toArray(result);
@@ -1479,8 +1478,7 @@ public class Questions {
     //[55] 二叉树的深度
     public static int maxDepth(OfferTraining.Code.TreeNode root) {
         //        退出条件
-        if (root == null)
-            return 0;
+        if (root == null) return 0;
         //        单层逻辑
         int leftDepth = maxDepth(root.left);
         int rightDepth = maxDepth(root.right);
@@ -1638,8 +1636,7 @@ public class Questions {
                 stack.push(strs[i]);
             }
 
-            if (stack.size() == 0)
-                result++;
+            if (stack.size() == 0) result++;
         }
 
         return result;
@@ -1661,6 +1658,32 @@ public class Questions {
         }
 
         return minHeap.peek();
+    }
+
+    //[264] 丑数
+    public int nthUglyNumber(int n) {
+        int[] factors = {2, 3, 5};
+        HashSet<Integer> set = new HashSet<>();
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+
+        set.add(1);
+        heap.add(1);
+
+        int ugly = 0;
+
+        for (int i = 0; i < n; i++) {
+            int cur = heap.poll();
+            ugly = cur;
+
+            for (int factor : factors) {
+                int next = cur * factor;
+                if (set.add(next)) {
+                    heap.add(next);
+                }
+            }
+        }
+
+        return ugly;
     }
 
 }

@@ -12,23 +12,33 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         int[] nums = {3, 2, 1, 5, 6, 6, 4};
-        System.out.println(client.findKthLargest(nums, 2));
+        System.out.println(client.nthUglyNumber(325));
     }
 
-    public int findKthLargest(int[] nums, int k) {
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    public int nthUglyNumber(int n) {
+        int[] factors = {2, 3, 5};
+        HashSet<Integer> set = new HashSet<>();
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
 
-        for (int n : nums) {
-            if (minHeap.size() < k) {
-                minHeap.add(n);
-            } else {
-                if (minHeap.peek() < n) {
-                    minHeap.poll();
-                    minHeap.add(n);
+        set.add(1);
+        heap.add(1);
+
+        int ugly = 0;
+
+        for (int i = 0; i < n; i++) {
+            int cur = heap.poll();
+            ugly = cur;
+
+            for (int factor : factors) {
+                int next = cur * factor;
+                if (set.add(next)) {
+                    heap.add(next);
                 }
             }
         }
 
-        return minHeap.peek();
+        return ugly;
     }
+
+
 }
