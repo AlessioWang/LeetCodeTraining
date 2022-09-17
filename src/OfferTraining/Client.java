@@ -1,6 +1,7 @@
 package OfferTraining;
 
 import com.sun.xml.internal.txw2.output.IndentingXMLFilter;
+import jdk.internal.org.objectweb.asm.tree.MultiANewArrayInsnNode;
 
 import java.util.*;
 
@@ -11,33 +12,21 @@ import java.util.*;
 public class Client {
     public static void main(String[] args) {
         Client client = new Client();
-        int[] nums = {3, 2, 1, 5, 6, 6, 4};
-        System.out.println(client.nthUglyNumber(325));
+        int[] nums = {1, 100, 1};
+        System.out.println(client.minCostClimbingStairs(nums));
     }
 
-    public int nthUglyNumber(int n) {
-        int[] factors = {2, 3, 5};
-        HashSet<Integer> set = new HashSet<>();
-        PriorityQueue<Integer> heap = new PriorityQueue<>();
+    public int minCostClimbingStairs(int[] cost) {
+        int len = cost.length;
+        int[] dp = new int[len];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
 
-        set.add(1);
-        heap.add(1);
-
-        int ugly = 0;
-
-        for (int i = 0; i < n; i++) {
-            int cur = heap.poll();
-            ugly = cur;
-
-            for (int factor : factors) {
-                int next = cur * factor;
-                if (set.add(next)) {
-                    heap.add(next);
-                }
-            }
+        for (int i = 2; i < len; i++) {
+            dp[i] = Math.min(dp[i - 1], dp[i - 2]) + cost[i];
         }
 
-        return ugly;
+        return Math.min(dp[len - 2], dp[len - 1]);
     }
 
 
